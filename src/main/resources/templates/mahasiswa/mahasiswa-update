@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head></head>
+<body>
+		<div class="container">
+		<div class="row">
+		<div class="col-md-6">
+			<a href="/mahasiswa/list" class="btn btn-primary">Back</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<form th:action="@{/mahasiswa/submit}" th:object="${mahasiswa}" method="post">
+				<div class="form-group">
+					<label for="exampleInputEmail1">Nama</label>
+					<input type="text" class="form-control" id="exampleInputEmail1"  val="${mahasiswa.nama}" placeholder="Nama Lengkap Mahasiswa" th:field="*{nama}"/>
+				</div>
+				<div class="form-group">
+					<label for="exampleInputPassword1">Jurusan</label>
+					<input  type="text" class="form-control" id="exampleInputPassword1" val="${mahasiswa.jurusan}" placeholder="Nama Jurusan" th:field="*{jurusan}"/>
+				</div>
+				<button type="submit" class="btn btn-default">Submit</button>
+			</form>
+		</div>
+	</div>
+</div>
+		
+</body>	
+</html>
