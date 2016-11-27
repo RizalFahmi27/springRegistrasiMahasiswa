@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bootstrap.min.css}"  href="../css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/scrolling-nav.css}"  href="../css/scrolling-nav.css" />
 	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bscrolling-nav.css}"  href="../css/bscrolling-nav.css" />
-	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css.css}"  href="../css/style.css.css" />
+	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"  href="../css/style.css" />
 
     <script th:src="@{/js/jquery.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
@@ -22,21 +22,29 @@
     <script th:src="@{/js/scrolling-nav.js}"></script>
 
     <script type="text/javascript">
-        (function($){
-            var $form = $('#formRegister');
-            $form.on('submit', function(e){
-                alert("hai");
+        $(document).ready(function(){
+            $('#loginForm').on('submit', function(e){
+                
+                var $form = $('#loginForm');
+                //alert($form);
                 e.preventDefault();
                 $.ajax({
                     url : $form.attr('action'),
                     type : 'post',
                     data : $form.serialize(),
                     success : function(response){
-
+                        if(response == "not found" ){
+                        //$('#note').replaceWith("password atau ID log in salah");
                     }
-                })
-            })
-        })
+                    else {
+                        window.location.replace("/dashboard/user");
+                    }
+                        //alert(response);
+                    }
+                });
+            });
+        });
+    
     </script>
 	
     <!-- Bootstrap Core CSS -->
@@ -67,7 +75,7 @@
                                  <h3>Login Area</h3>
                             </div>
                            
-                            <form th:action="@{/login/index/}" th:object="${usersData}" method="post" accept-charset="utf-8" role="form">
+                            <form id="loginForm" name="loginForm" th:action="@{/login/masuk/}" th:object="${userData}" method="post" accept-charset="utf-8" role="form">
                                 <div class="form-group">
                                     <label for="username">Username</label>
                                     <div class="input-group">
@@ -82,8 +90,14 @@
                                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" th:field="*{password}" th:required="required" />
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary" onclick="location.href='data_mhs.html';"><span class="glyphicon glyphicon-lock"></span> Login</button>
-                                <div style="text-align:right;"><a href="#signup">Sign Up</a></div>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Login</button>
+                                <br/>
+                                 <div id="note">
+                                    <div class="alert alert-warning">
+                                     <span th:text="${msg}" ></span>
+                                    </div>
+                                </div>
+                                <!-- <div style="text-align:right;"><a href="#signup">Sign Up</a></div> -->
                             </form>
                         </div>
                         </div>                    
@@ -94,7 +108,7 @@
         </div>
     </div>
 
-    <div id="signup" style="background-color: black; width:100%; height:100%; padding-top:5%; text-align:center;">
+    <!-- <div id="signup" style="background-color: black; width:100%; height:100%; padding-top:5%; text-align:center;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">                    
@@ -106,7 +120,7 @@
                                  <img src="image/harvard_logo.png" style="width:150px; height:150px;"></img>
                                  <h3>Sign Up Area</h3>
                             </div>
-                            <form id="formRegister" name="formRegister" th:action="@{/login/daftar}" th:object="${usersData}" method="post" accept-charset="utf-8" role="form">
+                            <form id="formRegister" name="formRegister" th:action="@{/login/daftar}" method="post" th:object="${usersData}"  accept-charset="utf-8" role="form">
                                 <div class="form-group">                                    
                                     <div class="input-group" style="width: 100%;">
                                         <input type="email" class="form-control" name="email" placeholder="Enter E-mail" th:field="*{email}" th:required="required" />
@@ -128,6 +142,7 @@
                                     </div>                                    
                                 </div>
                                 <a class="page-scroll"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Sign Up</button></a>
+
                                 <div id="note"></div>
                             </form>
                         </div>
@@ -137,7 +152,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- jQuery -->
     

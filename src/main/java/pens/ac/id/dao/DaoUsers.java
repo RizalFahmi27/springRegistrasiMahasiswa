@@ -7,5 +7,6 @@ import pens.ac.id.model.Users;
 public interface DaoUsers extends JpaRepository<Users, Long> {
 	
 	public Users getByEmail(String email);
+	
 
 }
