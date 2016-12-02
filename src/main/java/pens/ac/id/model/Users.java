@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,11 +26,8 @@ import lombok.Setter;;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users", catalog = "registrasi_mahasiswa_baru", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "email"),
-		@UniqueConstraint(columnNames = "password") })
+		@UniqueConstraint(columnNames = "email"), })
 public class Users {
-	
-	
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -43,18 +41,50 @@ public class Users {
 	@Column(length=50)
 	private String password;
 	
+//	@Column(length=20)
+//	private long id_dataDiri;
+//	
+//	@Column(length=20)
+//	private long id_dataOrtu;
+//	
+//	@Column(length=20)
+//	private long id_dataKeluarga;
+//	
+//	@Column(length=20)
+//	private long id_dataDokumen;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
-	@NotNull
-	private DataDiri id_dataDiri;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
-	@NotNull
-	private DataOrtu id_ortu;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_data_dokumen")
+	private DataDokumen dataDokumen;
 	
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
-	@NotNull
-	private DataKeluarga id_keluarga;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_data_keluarga")
+	private DataKeluarga dataKeluarga;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_data_ortu")
+	private DataOrtu dataOrtu;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_data_diri")
+	private DataDiri dataDiri;
+	
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
+//	@NotNull
+//	private DataDiri id_diri;
+//	
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
+//	@NotNull
+//	private DataOrtu id_ortu;
+//	
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
+//	@NotNull
+//	private DataKeluarga id_keluarga;
+//	
+//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
+//	@NotNull
+//	private DataKeluarga id_dokumen;
 	
 	
 }

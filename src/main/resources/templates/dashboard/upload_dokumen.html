@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Pendaftaran Mahasiswa Baru</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bootstrap.min.css}"  href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/simple-sidebar.css}"  href="../css/simple-sidebar.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bscrolling-nav.css}"  href="../css/bscrolling-nav.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"  href="../css/style.css" />
+
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            $('#deleteFile').on('click', function(e){
+                alert("hai : "+this.id);
+            })  
+        })
+
+    </script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        HOME
+                    </a>
+                </li>
+                <li>
+                    <a href="data_mhs.html">Data Mahasiswa</a>
+                </li>
+                <li>
+                    <a href="data_ortu.html">Data Orang Tua</a>
+                </li>
+                <li>
+                    <a href="asal_sekolah.html">Data Asal Sekolah</a>
+                </li>
+                <li>
+                    <a href="upload_dokumen.html">Upload Dokumen</a>
+                </li>
+                <li>
+                    <a href="#menu-toggle"><button class="btn btn-success">Log Out</button></a>
+                </li>             
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 style="text-align:center;">Upload Dokumen</h2><br/>
+                         <form class="form-horizontal" th:action="@{/fileUpload}" th:object="${dokumen}" method="post" enctype="multipart/form-data" id="formDokumen" name="formDokumen" >                        
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Foto 3x4</label>
+                                <div class="col-md-6">
+                                    <input type="hidden" name="id" id="id" th:value="${dokumen.id_dataDokumen}"  />
+                                    <div class="col-md-6">
+                                    <input type="file" name="file_foto" class="form-control" th:value="${dokumen.namaFileFoto}"  placeholder="foto" th:required="required"/>
+                                </div>
+                                <div  class="col-md-3">
+                                    <span th:if="${dokumen.namaFileFoto==null}"><em>File belum diupload</em></span>
+                                    <span th:if="${dokumen.namaFileFoto!=null}"><a th:href="@{/download/files/10000212(id=${dokumen.id_dataDokumen},type='foto',no_daftar=${dokumen.user.email})}" th:text="${dokumen.namaFileFoto}" th:target="_blank"></a></span>                                   
+                                </div>
+                                <div  class="col-md-3">
+                                    <button th:if="${dokumen.namaFileFoto!=null}" class="btn btn-success" id="deleteFile"><span class="glyphicon glyphicon glyphicon-trash"></span></button>                                   
+                                </div>                                
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Surat Keterangan Lulus</label>
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                    <input type="file" name="file_SKL" class="form-control" value="${dokumen.namaFileSKL}" placeholder="skl" th:required="required"/>
+                                    </div>
+                                
+                                <div  class="col-md-3">
+                                    <span th:if="${dokumen.namaFileSKL==null}"><em>File belum diupload</em></span>
+                                    <span th:if="${dokumen.namaFileSKL!=null}"><a th:href="@{/download/files/10000212(id=${dokumen.id_dataDokumen},type='skl',no_daftar=${dokumen.user.email})}" th:text="${dokumen.namaFileSKL}" th:target="_blank"></a></span>                                   
+                                </div>
+                                <div  class="col-md-3">
+                                    <button th:if="${dokumen.namaFileSKL!=null}" class="btn btn-success" id="deleteFile"><span class="glyphicon glyphicon glyphicon-trash"></span></button>                                   
+                                </div>
+                                </div> 
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Kartu Keluarga</label>
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                    <input type="file" name="file_KK" class="form-control" value="${dokumen.namaFileSKL}" placeholder="kk" th:required="required"/>
+                                </div>
+                                <div  class="col-md-3">
+                                    <span th:if="${dokumen.namaFileKK==null}"><em>File belum diupload</em></span>
+                                    <span th:if="${dokumen.namaFileKK!=null}"><a th:href="@{/download/files/10000212(id=${dokumen.id_dataDokumen},type='kk',no_daftar=${dokumen.user.email})}" th:text="${dokumen.namaFileKK}" th:target="_blank"></a></span>                                   
+                                </div>
+                                <div  class="col-md-3">
+                                    <button th:if="${dokumen.namaFileKK!=null}" class="btn btn-success" id="deleteFile"><span class="glyphicon glyphicon glyphicon-trash"></span></button>                                   
+                                </div>
+                                </div>
+                            </div>                            
+                            <!-- <div class="form-group">
+                                <label class="col-sm-3 control-label">Alamat Asal</label>
+                                <div class="col-sm-3">
+                                    <textarea name="alamat_asal" class="form-control" placeholder="Alamat Asal"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Kota</label>
+                                <div class="col-sm-3">
+                                    <select name="kota" class="form-control" required>     
+                                        <option value="Surabaya">Surabaya</option>
+                                        <option value="Jakarta">Jakarta</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">Kode Pos</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="tempat_lahir" class="form-control" placeholder="Kode Pos" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Provinsi</label>
+                                <div class="col-sm-3">
+                                    <select name="prov" class="form-control" required>     
+                                        <option value="Pilih Provinsi Anda">Pilih Provinsi Anda</option>
+                                        <option value="Bali">Bali</option>
+                                        <option value="Bangka Belitung">Bangka Belitung</option>
+                                        <option value="Banten">Banten</option>
+                                        <option value="Bengkulu">Bengkulu</option>
+
+                                        <option value="Gorontalo">Gorontalo</option>
+                                        <option value="Irian Jaya Barat">Irian Jaya Barat</option>
+                                        <option value="Jabotabekdecipsawcib">Jabotabekdecipsawcib</option>
+                                        <option value="Jambi">Jambi</option>
+                                        <option value="Jawa Barat">Jawa Barat</option>
+                                        <option value="Jawa Tengah">Jawa Tengah</option>
+                                        <option value="Jawa Timur">Jawa Timur</option>
+                                        <option value="Kalimantan Barat">Kalimantan Barat</option>
+                                        <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+
+                                        <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                                        <option value="Kalimantan Timur">Kalimantan Timur</option>
+                                        <option value="Kepulauan Riau">Kepulauan Riau</option>
+                                        <option value="Lampung">Lampung</option> 
+                                        <option value="Maluku">Maluku</option>
+                                        <option value="Maluku Utara">Maluku Utara</option>
+                                        <option value="Nangroe Aceh Darussalam">Nangroe Aceh Darussalam</option>
+                                        <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+                                        <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
+                                        <option value="Papua">Papua</option>
+                                        <option value="Riau">Riau</option>
+                                        <option value="Sulawesi Barat">Sulawesi Barat</option>
+                                        <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                                        <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                                        <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+                                        <option value="Sulawesi Utara">Sulawesi Utara</option>
+                                        <option value="Sumatera Barat">Sumatera Barat</option>
+
+                                        <option value="Sumatera Selatan">Sumatera Selatan</option>
+                                        <option value="Sumatera Utara">Sumatera Utara</option>
+                                        <option value="Yogyakarta">Yogyakarta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">No Telepon</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="no_telepon" class="form-control" placeholder="No Telepon" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-3">
+                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                </div>
+                            </div>                        
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Pilihan Jurusan 1</label>
+                                <div class="col-sm-2">
+                                    <select name="jurusan1" class="form-control" required>
+                                        <option value=""> - Pilih Jurusan - </option>
+                                        <option value="Matematika">Matematika</option>
+                                        <option value="Kimia">Kimia</option>
+                                        <option value="Fisika">Fisika</option>
+                                        <option value="Biologi">Biologi</option>
+                                        <option value="Agroteknologi">Agroteknologi</option>
+                                        <option value="Agribisnis">Agribisnis</option>
+                                        <option value="Ilmu & Teknologi Pangan">Ilmu & Teknologi Pangan</option>
+                                        <option value="Teknik Pertanian">Teknik Pertanian</option>
+                                        <option value="Biologi">Biologi</option>                            
+                                        <option value="Ekonomi">Ekonomi</option>
+                                        <option value="Bisnis">Bisnis</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Pilihan Jurusan 2</label>
+                                <div class="col-sm-2">
+                                    <select name="jurusan2" class="form-control" required>
+                                        <option value=""> - Pilih Jurusan - </option>
+                                        <option value="Matematika">Matematika</option>
+                                        <option value="Kimia">Kimia</option>
+                                        <option value="Fisika">Fisika</option>
+                                        <option value="Biologi">Biologi</option>
+                                        <option value="Agroteknologi">Agroteknologi</option>
+                                        <option value="Agribisnis">Agribisnis</option>
+                                        <option value="Ilmu & Teknologi Pangan">Ilmu & Teknologi Pangan</option>
+                                        <option value="Teknik Pertanian">Teknik Pertanian</option>
+                                        <option value="Biologi">Biologi</option>                            
+                                        <option value="Ekonomi">Ekonomi</option>
+                                        <option value="Bisnis">Bisnis</option>
+                                    </select>
+                                </div>
+                            </div>  -->                          
+                            
+                            <div class="form-group">                               
+
+                                <div class="col-sm-9">
+                                    <a href="#menu-toggle"><button class="btn btn-success" id="menu-toggle"><span class="glyphicon glyphicon-arrow-left"></span> Hide Menu</button></a>
+                                </div>
+                                <div class="col-sm-3">
+        <a href="#"><button type="reset" class="btn btn-danger" data-toggle="tooltip" title="Batal">Reset <span class="glyphicon glyphicon-remove"/></button></a>
+<button type="submit" name="next" class="btn btn-primary" data-toggle="tooltip" title="Simpan Data mahasiswa"> 
+    Submit <span class="glyphicon glyphicon-arrow-right"/></button>                                    
+                                </div>
+                            </div>
+                        </form> <!-- /form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.easing.min.js}"></script>
+    <script th:src="@{/js/scrolling-nav.js}"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

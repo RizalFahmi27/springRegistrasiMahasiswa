@@ -2,18 +2,23 @@ package pens.ac.id.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.support.RequestContextUtils;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pens.ac.id.model.DataDiri;
+import pens.ac.id.model.DataDokumen;
 import pens.ac.id.model.DataKeluarga;
 import pens.ac.id.model.DataOrtu;
 import pens.ac.id.model.LogInData;
@@ -24,57 +29,55 @@ import pens.ac.id.service.ServiceUsers;
 @Controller
 public class ControllerUser {
 	
-	private DataTemp dataTemp;
+
 	@Autowired
 	private ServiceUsers serviceUsers;
 	
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String loginPage( HttpServletRequest request){
-		HttpSession session = request.getSession();
-		if(session.getAttribute("is_loggedIn") == null){
-			return "redirect:/login";  	
-		}
-		return "redirect:/dashboard/user";	
-	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public ModelAndView login(HttpServletRequest request){
+	public String login(Model newModel, HttpServletRequest request, RedirectAttributes redirectAttributes){
 	HttpSession session = request.getSession();
-	ModelAndView model = new ModelAndView("/login/login");
 	if(session.getAttribute("is_loggedIn") == null){
-		Users logInData = new Users();
-		model.addObject("userData", logInData);
-		model.addObject("msg", "Masukkan password dan ID User Anda");
-		System.out.println("went here");
-		return model;  
+			Map<String, ?> inputFlashMap = RequestContextUtils.getInputFlashMap(request);
+			if(inputFlashMap!=null){
+				String msg = (String) inputFlashMap.get("message");
+				if(msg!=null){				
+				newModel.addAttribute("msg",msg);
+				System.out.println(msg);
+				}
+				else {				
+					newModel.addAttribute("msg", "Masukkan password dan ID User Anda");
+				}
+			}
+		//String msg = (String) session.getAttribute("msg");
+		System.out.println("duar");
+		newModel.addAttribute("userData", new Users());	
+		return "/login/login";  
 	}
-	
-	return new ModelAndView("redirect:/dashboard/user");
+		
+	long id = (Long) session.getAttribute("email");
+	System.out.println(""+id);
+	return "redirect:/dashboard/user/"+id;
 }
 	
-	@RequestMapping(value="/dashboard/user", method = RequestMethod.GET)
-	public String home(Model model, HttpServletRequest request){
-		HttpSession session = request.getSession();
-		if(session.getAttribute("is_loggedIn") == null)
-			return "redirect:/";
-		model.addAttribute("form", new DataDiri());
-		return "dashboard/dashboard";
-	}
-	
-	
+
 	@RequestMapping(value="/login/masuk", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("userData")Users user, HttpServletRequest request){
+	public String login(@ModelAttribute("userData")Users user, HttpServletRequest request, RedirectAttributes redirect){
 		HttpSession session = request.getSession();
-		ModelAndView model = new ModelAndView();
-		if(session.getAttribute("is_loggedIn") == null){
+//		model.addAttribute("userData", new Users());
+//		return "/login/login";
+//		if(session.getAttribute("is_loggedIn") == null){
 			
 			Users userData = serviceUsers.getByEmail(user.getEmail());
-			if(userData == null){
-				
-				model.addObject("msg", "User ID atau password salah");
-				model.addObject("userData", new Users());
-				model.setViewName("/login/login");
-				return model;
+			System.out.println("idnya : " + serviceUsers.getById((long) 4).getId());
+			if(userData == null){		
+				redirect.addFlashAttribute("message", "User ID atau password salah");
+				//model.addObject("msg", "User ID atau password salah");
+				//model.addObject("userData", new Users());
+				session.setAttribute("msg", "User ID atau password salah");
+				System.out.println("email tidak ketemu");
+				//model.addAttribute("userData", new Users());
+				return "redirect:/login";
 			}
 			else {				
 				System.out.println("\n" + userData.getPassword());
@@ -82,43 +85,55 @@ public class ControllerUser {
 				
 				if(BCrypt.checkpw(user.getPassword(), userData.getPassword())){
 					
+					
 					session.setAttribute("is_loggedIn", true);
 					session.setAttribute("id", userData.getId());
 					session.setAttribute("email", userData.getEmail());
-					return new ModelAndView("redirect:/dashboard/user");
+					System.out.println("boom");
+					return "redirect:/dashboard/user/"+userData.getEmail();
 					
 				}
 				else {
-					model.setViewName("/login/login");
-					model.addObject("msg", "User ID atau password salah");
-					model.addObject("userData", new Users());
-					return model;
+					redirect.addFlashAttribute("message", "User ID atau password salah");
+					session.setAttribute("msg", "User ID atau password salah");
+					return "redirect:/login";
 				}
 			}
-		}
-			System.out.println(session.getAttribute("is_loggedIn").toString());
-			return new ModelAndView("redirect:/dashboard/user");
+//		}
+//			System.out.println(session.getAttribute("is_loggedIn").toString());
+//			long id = (Long) session.getAttribute("id");
+//			return "redirect:/dashboard/user/"+id;
 	}
 	
-	
-	@RequestMapping(value="login/daftar", method = RequestMethod.POST)
-	@ResponseBody
-	public String register(@ModelAttribute("usersData") Users user, HttpServletRequest request){
+	@RequestMapping(value="/logout", method=RequestMethod.GET)
+	public String logout(HttpServletRequest request){
 		HttpSession session = request.getSession();
-		
-		if(session.getAttribute("is_loggedIn") == null){
-			Users users = serviceUsers.getByEmail(user.getEmail());
-			if(users != null){
-				return "Data sebelumnya ditemukan, gunakan menu log in"; 
-			}
-			else {
-					
-				serviceUsers.save(user);
-				return "data berhasil disimpan";
-			}
-		}
-		return "redirect:" + "/";
+		session.removeAttribute("is_loggedIn");
+		session.removeAttribute("id");
+		session.removeAttribute("email");
+		return "redirect:/login";
 	}
+//	
+//	
+//	@RequestMapping(value="login/daftar", method = RequestMethod.POST)
+//	@ResponseBody
+//	public String register(@ModelAttribute("usersData") Users user, HttpServletRequest request){
+//		HttpSession session = request.getSession();
+//		
+//		if(session.getAttribute("is_loggedIn") == null){
+//			Users users = serviceUsers.getByEmail(user.getEmail());
+//			if(users != null){
+//				return "Data sebelumnya ditemukan, gunakan menu log in"; 
+//			}
+//			else {
+//					
+//				serviceUsers.save(user);
+//				return "data berhasil disimpan";
+//			}
+//		}
+//		return "redirect:" + "/";
+	
+
 	
 	
 	private class DataTemp{
@@ -148,10 +163,5 @@ public class ControllerUser {
 		
 	}
 	
-	
-	
-//	@RequestMapping(value="/login/masuk", method = RequestMethod.POST)
-//	public String login(@ModelAttribute Users user){
-//		
-//	}
+
 }

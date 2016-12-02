@@ -22,28 +22,28 @@
     <script th:src="@{/js/scrolling-nav.js}"></script>
 
     <script type="text/javascript">
-        $(document).ready(function(){
-            $('#loginForm').on('submit', function(e){
+        // $(document).ready(function(){
+        //     $('#loginForm').on('submit', function(e){
                 
-                var $form = $('#loginForm');
-                //alert($form);
-                e.preventDefault();
-                $.ajax({
-                    url : $form.attr('action'),
-                    type : 'post',
-                    data : $form.serialize(),
-                    success : function(response){
-                        if(response == "not found" ){
-                        //$('#note').replaceWith("password atau ID log in salah");
-                    }
-                    else {
-                        window.location.replace("/dashboard/user");
-                    }
-                        //alert(response);
-                    }
-                });
-            });
-        });
+        //         var $form = $('#loginForm');
+        //         //alert($form);
+        //         e.preventDefault();
+        //         $.ajax({
+        //             url : $form.attr('action'),
+        //             type : 'post',
+        //             data : $form.serialize(),
+        //             success : function(response){
+        //                 if(response == "not found" ){
+        //                 //$('#note').replaceWith("password atau ID log in salah");
+        //             }
+        //             else {
+        //                 //window.location.replace("/dashboard/user");
+        //             }
+        //                 //alert(response);
+        //             }
+        //         });
+        //     });
+        // });
     
     </script>
 	
@@ -71,7 +71,7 @@
                        <div class="panel panel-default">
                        <div class="panel-body">
                             <div class="page-header">
-                                 <img src="image/harvard_logo.png" style="width:150px; height:150px;"></img>
+                                 <img src="image/Logo_PENS.png" style="width:150px; height:150px;"></img>
                                  <h3>Login Area</h3>
                             </div>
                            
@@ -94,7 +94,8 @@
                                 <br/>
                                  <div id="note">
                                     <div class="alert alert-warning">
-                                     <span th:text="${msg}" ></span>
+                                     <span th:if="${msg==null}">Masukkan ID dan password Anda</span>
+                                     <span th:if="${msg!=null}" th:text="${msg}"></span>
                                     </div>
                                 </div>
                                 <!-- <div style="text-align:right;"><a href="#signup">Sign Up</a></div> -->

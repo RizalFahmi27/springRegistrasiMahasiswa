@@ -24,13 +24,17 @@ import lombok.Setter;;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DataKeluarga {
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private Users users;
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+	//private Users users;
 	
 	@GenericGenerator(name="generator", strategy="foreign",
 			parameters = @Parameter(name="property", value="users"))
 	@Id
 	@GeneratedValue
 	private long id_keluarga;
+	
+	@OneToOne(mappedBy="dataKeluarga")
+	private Users user;
+	
 }

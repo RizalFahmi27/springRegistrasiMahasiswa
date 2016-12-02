@@ -24,13 +24,16 @@ import lombok.Setter;;
 @AllArgsConstructor
 
 public class DataOrtu {
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
-	private Users users;
+//	@OneToOne(fetch = FetchType.LAZY)
+//	@PrimaryKeyJoinColumn
+//	private Users users;
 	
-	@GenericGenerator(name="generator", strategy="foreign",
-			parameters = @Parameter(name="property", value="users"))
+//	@GenericGenerator(name="generator", strategy="foreign",
+//			parameters = @Parameter(name="property", value="users"))
 	@Id
 	@GeneratedValue
 	private long id_ortu;
+	
+	@OneToOne(mappedBy="dataOrtu")
+	private Users user;
 }

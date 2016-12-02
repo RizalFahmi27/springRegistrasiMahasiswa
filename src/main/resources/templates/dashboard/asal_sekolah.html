@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Pendaftaran Mahasiswa Baru</title>
+
+
+
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bootstrap.min.css}"  href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/simple-sidebar.css}"  href="../css/simple-sidebar.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bscrolling-nav.css}"  href="../css/bscrolling-nav.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"  href="../css/style.css" />
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.easing.min.js}"></script>
+    <script th:src="@{/js/scrolling-nav.js}"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.html">
+                        HOME
+                    </a>
+                </li>
+                <li>
+                    <a href="data_mhs.html">Data Mahasiswa</a>
+                </li>
+                <li>
+                    <a href="data_ortu.html">Data Orang Tua</a>
+                </li>
+                <li>
+                    <a href="asal_sekolah.html">Data Asal Sekolah</a>
+                </li>
+                <li>
+                    <a href="upload_dokumen.html">Upload Dokumen</a>
+                </li>
+                <li>
+                    <a href="#menu-toggle"><button class="btn btn-success">Log Out</button></a>
+                </li>                   
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 style="text-align:center;">Data Asal Sekolah</h2><br/>
+                         <form class="form-horizontal" action="" method="post">                        
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Nama Sekolah</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="nama_sekolah" class="form-control" placeholder="Nama Sekolah" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Jenis Sekolah</label>
+                                <div class="col-sm-2">
+                                    <select name="jenis_sekolah" class="form-control" required>     
+                                        <option value="SMA">SMA</option>
+                                        <option value="SMK">SMK</option>
+                                        <option value="MAN">MAN</option>
+                                    </select>
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Alamat Sekolah</label>
+                                <div class="col-sm-3">
+                                    <textarea name="alamat_sekolah" class="form-control" placeholder="Alamat Sekolah"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Kota</label>
+                                <div class="col-sm-3">
+                                    <select name="kota" class="form-control" required>     
+                                        <option value="Surabaya">Surabaya</option>
+                                        <option value="Jakarta">Jakarta</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2 control-label">Kode Pos</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="kode_pos_sklh" class="form-control" placeholder="Kode Pos" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Provinsi</label>
+                                <div class="col-sm-3">
+                                    <select name="prov" class="form-control" required>     
+                                        <option value="Pilih Provinsi Anda">Pilih Provinsi Anda</option>
+                                        <option value="Bali">Bali</option>
+                                        <option value="Bangka Belitung">Bangka Belitung</option>
+                                        <option value="Banten">Banten</option>
+                                        <option value="Bengkulu">Bengkulu</option>
+
+                                        <option value="Gorontalo">Gorontalo</option>
+                                        <option value="Irian Jaya Barat">Irian Jaya Barat</option>
+                                        <option value="Jabotabekdecipsawcib">Jabotabekdecipsawcib</option>
+                                        <option value="Jambi">Jambi</option>
+                                        <option value="Jawa Barat">Jawa Barat</option>
+                                        <option value="Jawa Tengah">Jawa Tengah</option>
+                                        <option value="Jawa Timur">Jawa Timur</option>
+                                        <option value="Kalimantan Barat">Kalimantan Barat</option>
+                                        <option value="Kalimantan Selatan">Kalimantan Selatan</option>
+
+                                        <option value="Kalimantan Tengah">Kalimantan Tengah</option>
+                                        <option value="Kalimantan Timur">Kalimantan Timur</option>
+                                        <option value="Kepulauan Riau">Kepulauan Riau</option>
+                                        <option value="Lampung">Lampung</option> 
+                                        <option value="Maluku">Maluku</option>
+                                        <option value="Maluku Utara">Maluku Utara</option>
+                                        <option value="Nangroe Aceh Darussalam">Nangroe Aceh Darussalam</option>
+                                        <option value="Nusa Tenggara Barat">Nusa Tenggara Barat</option>
+                                        <option value="Nusa Tenggara Timur">Nusa Tenggara Timur</option>
+                                        <option value="Papua">Papua</option>
+                                        <option value="Riau">Riau</option>
+                                        <option value="Sulawesi Barat">Sulawesi Barat</option>
+                                        <option value="Sulawesi Selatan">Sulawesi Selatan</option>
+                                        <option value="Sulawesi Tengah">Sulawesi Tengah</option>
+                                        <option value="Sulawesi Tenggara">Sulawesi Tenggara</option>
+                                        <option value="Sulawesi Utara">Sulawesi Utara</option>
+                                        <option value="Sumatera Barat">Sumatera Barat</option>
+
+                                        <option value="Sumatera Selatan">Sumatera Selatan</option>
+                                        <option value="Sumatera Utara">Sumatera Utara</option>
+                                        <option value="Yogyakarta">Yogyakarta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Status Sekolah</label>
+                                <div class="col-sm-2">
+                                    <select name="status_sekolah" class="form-control" required>     
+                                        <option value="Negeri">Negeri</option>
+                                        <option value="Swasta">Swasta</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Jurusan</label>
+                                <div class="col-sm-2">
+                                    <select name="jurusan" class="form-control" required>     
+                                        <option value="ipa">IPA</option>
+                                        <option value="ips">IPS</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Nilai UNAS</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="nilai_unas" class="form-control" placeholder="Nilai UNAS" required>
+                                </div>
+                                <label class="col-sm-2 control-label">Nilai Rapor</label>
+                                <div class="col-sm-3">
+                                    <input type="text" name="nilai_rapor" class="form-control" placeholder="Nilai Rapor" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Tahun Lulus</label>
+                                <div class="col-sm-2">
+                                    <select name="thn_lulus" class="form-control" required>     
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-12 control-label" style="text-align:center">Saya menyatakan dengan sesungguhnya bahwa data yang saya isikan dalam formulir ini benar. Apabila ternyata data tersebut tidak benar/palsu, maka saya bersedia menerima sanksi yang berlaku</label>
+                            </div>                        
+                            
+                            <div class="form-group">                               
+
+                                <div class="col-sm-9">
+                                    <a href="#menu-toggle"><button class="btn btn-success" id="menu-toggle"><span class="glyphicon glyphicon-arrow-left"></span> Hide Menu</button></a>
+                                </div>
+                                <div class="col-sm-3">
+                                    <a href="#"><button type="reset" class="btn btn-danger" data-toggle="tooltip" title="Batal">Reset <span class="glyphicon glyphicon-remove"></button></a>
+                                    <a href="#"><button name="simpan" class="btn btn-primary" data-toggle="tooltip" title="Simpan Data mahasiswa"></span>Simpan <span class="glyphicon glyphicon-arrow-right"></button></a>                                    
+                                </div>
+                            </div>
+                        </form> <!-- /form -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>
