@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,47 +10,18 @@
     <meta name="author" content=""></meta>
 
     <title>Scrolling Nav - Start Bootstrap Template</title>
-	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bootstrap.min.css}"  href="../css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/scrolling-nav.css}"  href="../css/scrolling-nav.css" />
-	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bscrolling-nav.css}"  href="../css/bscrolling-nav.css" />
-	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"  href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/assets/css/bootstrap.min.css}"  href="../assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/assets/css/scrolling-nav.css}"  href="../assets/css/scrolling-nav.css" />
+   
+    <link rel="stylesheet" type="text/css" media="all"  th:href="@{/assets/css/style.css}"  href="../assets/css/style.css" />
 
-    <script th:src="@{/js/jquery.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/jquery.easing.min.js}"></script>
-    <script th:src="@{/js/scrolling-nav.js}"></script>
+    <script th:src="@{/assets/js/jquery.js}"></script>
+    <script th:src="@{/assets/js/bootstrap.min.js}"></script>
+    <script th:src="@{/assets/js/jquery.easing.min.js}"></script>
+    <script th:src="@{/assets/js/scrolling-nav.js}"></script>
 
-    <script type="text/javascript">
-        // $(document).ready(function(){
-        //     $('#loginForm').on('submit', function(e){
-                
-        //         var $form = $('#loginForm');
-        //         //alert($form);
-        //         e.preventDefault();
-        //         $.ajax({
-        //             url : $form.attr('action'),
-        //             type : 'post',
-        //             data : $form.serialize(),
-        //             success : function(response){
-        //                 if(response == "not found" ){
-        //                 //$('#note').replaceWith("password atau ID log in salah");
-        //             }
-        //             else {
-        //                 //window.location.replace("/dashboard/user");
-        //             }
-        //                 //alert(response);
-        //             }
-        //         });
-        //     });
-        // });
-    
-    </script>
-	
-    <!-- Bootstrap Core CSS -->
-	
-    <!-- Custom CSS -->
-    <link href="resources/templates/login/css/scrolling-nav.css" rel="stylesheet"></link>
-	
+    <title>Pendaftaran Mahasiswa Baru</title>
+
     
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,45 +30,84 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<body>
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color:black; opacity:0.8;">
+        <div class="container">
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top" style="color:white;">PMB PENS</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    
+                    <li class="hidden">
+                        <a class="page-scroll" href="#page-top"></a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="#panduan_dftr" style="color:white;">Panduan Pendafataran</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <script th:if="${msgRegist!=null}">
+        $(document).ready(function () {
+            // Handler for .ready() called.
+            $('html, body').animate({
+                scrollTop: $('#register').offset().top
+            }, 'slow');
+        });
+    </script>
     <!-- Intro Section -->
-    <div id="login" style="background-image:url('image/1.jpg'); width:100%; height:100%; padding-top:8%; text-align:center; background-repeat: no-repeat; background-size: cover">
+    <div id="login" style="background-image:url('assets/image/1.jpg'); width:100%; height:100%; padding-top:10%; text-align:center; background-size: cover">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">                    
                     <div class="col-md-4"></div>                    
                     <div class="col-md-4">
-                       <div class="panel panel-default">
+                       <div class="panel panel-default" style="margin-top:-30px;">
                        <div class="panel-body">
                             <div class="page-header">
-                                 <img src="image/Logo_PENS.png" style="width:150px; height:150px;"></img>
+                                 <img src="assets/image/Logo_PENS.png" style="width:150px; height:150px;"></img>
                                  <h3>Login Area</h3>
                             </div>
-                           
+                           <!--<form action="validasilogin.php" method="post" accept-charset="utf-8" role="form">
+                           <div class="alert alert-warning"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true"><div class="glyphicon glyphicon-volume-off"></div></span><span class="sr-only">Close</span></button>
+                         Maaf, Username dan password yang anda masukkan tidak cocok. Silahkan coba lagi!
+                         </div>-->
                             <form id="loginForm" name="loginForm" th:action="@{/login/masuk/}" th:object="${userData}" method="post" accept-charset="utf-8" role="form">
                                 <div class="form-group">
-                                    <label for="username">Username</label>
+                                    <label for="username">KAP</label>
                                     <div class="input-group">
                                         <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" th:field="*{email}" th:required="required" />
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan KAP" th:field="*{kap}" th:required="required" />
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="password">Password</label>
+                                    <label for="password">PIN</label>
                                     <div class="input-group">
                                        <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
-                                       <input type="password" class="form-control" id="password" name="password" placeholder="Password" th:field="*{password}" th:required="required" />
+                                       <input type="password" class="form-control" id="pin" name="pin" placeholder="Masukkan PIN" th:field="*{pin}" th:required="required" />
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Login</button>
+                                <button type="submit" class="btn btn-primary" ><span class="glyphicon glyphicon-lock"></span> Login</button>
                                 <br/>
-                                 <div id="note">
-                                    <div class="alert alert-warning">
-                                     <span th:if="${msg==null}">Masukkan ID dan password Anda</span>
+                                 <div id="note" class="note">
+                                    <div class="alert alert-warning" style="padding:7px;">
+                                     <span th:if="${msg==null}">Masukkan KAP dan PIN Anda</span>
                                      <span th:if="${msg!=null}" th:text="${msg}"></span>
                                     </div>
                                 </div>
-                                <!-- <div style="text-align:right;"><a href="#signup">Sign Up</a></div> -->
+                                <div style="text-align:right;"><p class="help-block">Belum mempunyai akun? <a href="#register">Register</a></p></div>
                             </form>
                         </div>
                         </div>                    
@@ -109,7 +118,7 @@
         </div>
     </div>
 
-    <!-- <div id="signup" style="background-color: black; width:100%; height:100%; padding-top:5%; text-align:center;">
+    <div id="register" style="background-color: black; width:100%; height:100%; padding-top:8%; text-align:center;">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">                    
@@ -118,33 +127,32 @@
                        <div class="panel panel-default">
                        <div class="panel-body">
                             <div class="page-header">
-                                 <img src="image/harvard_logo.png" style="width:150px; height:150px;"></img>
-                                 <h3>Sign Up Area</h3>
+                                 <img src="assets/image/Logo_PENS.png" style="width:150px; height:150px;"/>
+                                 <h3>Register Area</h3>
                             </div>
-                            <form id="formRegister" name="formRegister" th:action="@{/login/daftar}" method="post" th:object="${usersData}"  accept-charset="utf-8" role="form">
-                                <div class="form-group">                                    
-                                    <div class="input-group" style="width: 100%;">
-                                        <input type="email" class="form-control" name="email" placeholder="Enter E-mail" th:field="*{email}" th:required="required" />
-                                    </div>                                    
-                                </div>
+                            <form id="registrationForm" name="registrationForm" th:action="@{/registrasi/}" th:object="${userData}" method="post" accept-charset="utf-8" role="form">                                
                                 <div class="form-group">
+                                    <label>Nama Lengkap</label>
                                     <div class="input-group" style="width: 100%;">
-                                        <input type="text" class="form-control" name="username" placeholder="Enter Username" th:field="*{username}" th:required="required" />
+                                        <input type="text" class="form-control" name="namalengkap" id="namalengkap" th:field="*{namalengkap}" placeholder="Nama Lengkap" th:required="required" />
                                     </div>                                    
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group" style="width: 100%;">
-                                        <input type="password" class="form-control" name="passwd2" placeholder="Enter Password" th:field="*{password}" th:required="required" />
+                                <div class="form-group">    
+                                    <label>Tanggal Lahir</label>   
+                                    <div class='input-group date' id='datepicker'   style="width: 100%;">
+                                        <input type='date' name="tanggallahir" id="tanggallahir" class="form-control" th:field="*{tanggallahir}" placeholder="dd-mm-yyyy" th:required="required"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                     </div>                                    
                                 </div>
-                                <div class="form-group">
-                                    <div class="input-group" style="width: 100%;">
-                                        <input type="password" class="form-control" name="repeatpasswd" placeholder="Repeat Password" th:field="*{password}" th:required="required" />
-                                    </div>                                    
-                                </div>
-                                <a class="page-scroll"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Sign Up</button></a>
-
-                                <div id="note"></div>
+                                
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Register</button>
+                                <div id="noteRegist" class="note" th:if="${msgRegist!=null}">
+                                    <div class="alert alert-warning" style="padding:7px;">
+                                     <span >Anda sudah terdaftar, gunakan menu Log In</span>
+                                    </div>
+                                </div>  
                             </form>
                         </div>
                         </div>                    
@@ -153,14 +161,47 @@
                 </div>
             </div>
         </div>
-    </div> -->
+    </div>
 
-    <!-- jQuery -->
-    
+    <!-- Cara Pendaftaran Section -->
+    <div id="panduan_dftr" style="background-color: #f2f2f2; width:100%; height:100%; padding-top:8%;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 style="text-align:center;">Panduan Pendaftaran</h1>
+                    <p><b>Tahap proses Pendaftaran Mahasiswa Baru PENS :</b></p>
+                    <ol>
+                        <li>
+                            Silahkan Login untuk mendaftar PMB atau Register/Daftar Akun jika belum mempunyai Akun
+                        </li>
+                        <li>
+                            Isikan data formulir pendaftaran dengan lengkap dan benar.
+                        </li>
+                        <li>
+                            Sebelum membayar uang pendaftaran pastikan syarat-syarat memenuhi kriteria, pilihan jalur pendaftaran dan pilihan program studi sudah sesuai. Bila ada kesalahan maaf uang pendaftaran tidak bisa dikembalikan/dialihkan.
+                        </li>
+                        <li>
+                            Membayar biaya pendaftaran Penerimaan Mahasiswa Baru (PMB PENS) di bank BRI, BNI, bank Permata, bank Mandiri, bank CIMB Niaga dan bank BTN dengan menggunakan 9 digit nomor pendaftaran yang telah diterima. <br/>
+                            Biaya pendaftaran semua jalur D3 dan D4 : Rp.100.000,- (seratus ribu rupiah) untuk semua jalur.
+                        </li>
+                        <li>
+                            Upload berkas-berkas yang dibutuhkan, yaitu : <br/>Foto terbaru (background merah, ukuran 3x4)<br/>Scan ijazah/SKHU/SKL/Sk Peserta UN<br/>Scan kartu keluarga<br/>Scan slip bukti pembayaran pendaftaran.
+                        </li>
+                        <li>
+                            Verifikasi pendaftaran.<br/> 
+                            Formulir pendaftaran dan pilihan program studi tidak dapat diubah lagi setelah Anda membayar biaya pendaftaran.
+                        </li>
+                        <li>
+                            Download kartu ujian masuk.<br/>
+                            Kartu ini harus dibawa ketika ujian seleksi masuk. <br/>Mengikuti ujian seleksi masuk pada waktu yang telah ditentukan. Setelah mengikuti ujian seleksi masuk, Anda dapat melihat hasil seleksi pada tanggal yang telah ditentukan.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
    
-    
-   
-    
 
    
 

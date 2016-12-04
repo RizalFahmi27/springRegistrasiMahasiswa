@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 @Service
 public class ServiceDokumen {
 	
@@ -47,6 +48,23 @@ public class ServiceDokumen {
 		else {
 			return false;
 		}
+	}
+	
+	public boolean deleteDocument(DataDokumen dataDokumen, String type){
+		DataDokumen oldData = daoDokumen.findOne(dataDokumen.getId_dataDokumen());
+		if(oldData!=null){
+			if(type.equalsIgnoreCase("foto"))
+				oldData.setNamaFileFoto(null);
+			else if(type.equalsIgnoreCase("KK"))
+				oldData.setNamaFileKK(null);
+			else if(type.equalsIgnoreCase("SKL"))
+				oldData.setNamaFileSKL(null);
+			else if(type.equalsIgnoreCase("bukti"))
+				oldData.setNamaFileBuktiPendaftaran(null);
+			daoDokumen.save(oldData);
+			return true;
+		}
+		return false;
 	}
 	
 //	public void updateIdDokumen(DataDokumen dataDokumen){

@@ -1,6 +1,7 @@
 package pens.ac.id.model;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.UniqueConstraint;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +30,7 @@ import lombok.Setter;;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users", catalog = "registrasi_mahasiswa_baru", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "email"), })
+		@UniqueConstraint(columnNames = "KAP"), })
 public class Users {
 	
 	@Id
@@ -34,12 +38,34 @@ public class Users {
 	private long id;
 	
 	@NotNull
-	@Column(length=50, unique = true)
-	private String email;
+	@Column(length=255, unique = true)
+	private String kap;
 	
 	@NotNull
-	@Column(length=50)
-	private String password;
+	@Column(length=255, unique=true)
+	private String pin;
+	
+	@NotNull
+	@Column(length=255)
+	private String namalengkap;
+	
+	@Column
+	private boolean status;
+	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@NotNull
+	private Date tanggallahir;
+	
+	@NotNull
+	@Column(length=200, unique=true)
+	private String no_pendaftaran;
+	
+	@NotNull
+	@Column(length=200, unique=true)
+	private String kodePembayaran;
+	
+	@Column(length=200, unique=true)
+	private String noUjian;
 	
 //	@Column(length=20)
 //	private long id_dataDiri;
@@ -59,8 +85,8 @@ public class Users {
 	private DataDokumen dataDokumen;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_data_keluarga")
-	private DataKeluarga dataKeluarga;
+	@JoinColumn(name="id_dataSekolah")
+	private DataSekolah dataSekolah;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="id_data_ortu")
@@ -70,21 +96,10 @@ public class Users {
 	@JoinColumn(name="id_data_diri")
 	private DataDiri dataDiri;
 	
-//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
-//	@NotNull
-//	private DataDiri id_diri;
-//	
-//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
-//	@NotNull
-//	private DataOrtu id_ortu;
-//	
-//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
-//	@NotNull
-//	private DataKeluarga id_keluarga;
-//	
-//	@OneToOne(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.ALL)
-//	@NotNull
-//	private DataKeluarga id_dokumen;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="id_lokasi_ujian")
+	private LokasiUjian lokasiUjian;
+
 	
 	
 }

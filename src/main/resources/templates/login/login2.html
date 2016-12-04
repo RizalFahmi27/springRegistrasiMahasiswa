@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Scrolling Nav - Start Bootstrap Template</title>
+	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bootstrap.min.css}"  href="../css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/scrolling-nav.css}"  href="../css/scrolling-nav.css" />
+	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/bscrolling-nav.css}"  href="../css/bscrolling-nav.css" />
+	<link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"  href="../css/style.css" />
+
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery.easing.min.js}"></script>
+    <script th:src="@{/js/scrolling-nav.js}"></script>
+
+    <script type="text/javascript">
+        // $(document).ready(function(){
+        //     $('#loginForm').on('submit', function(e){
+                
+        //         var $form = $('#loginForm');
+        //         //alert($form);
+        //         e.preventDefault();
+        //         $.ajax({
+        //             url : $form.attr('action'),
+        //             type : 'post',
+        //             data : $form.serialize(),
+        //             success : function(response){
+        //                 if(response == "not found" ){
+        //                 //$('#note').replaceWith("password atau ID log in salah");
+        //             }
+        //             else {
+        //                 //window.location.replace("/dashboard/user");
+        //             }
+        //                 //alert(response);
+        //             }
+        //         });
+        //     });
+        // });
+    
+    </script>
+	
+    <!-- Bootstrap Core CSS -->
+	
+    <!-- Custom CSS -->
+    <link href="resources/templates/login/css/scrolling-nav.css" rel="stylesheet"></link>
+	
+    
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <!-- Intro Section -->
+    <div id="login" style="background-image:url('image/1.jpg'); width:100%; height:100%; padding-top:8%; text-align:center; background-repeat: no-repeat; background-size: cover">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">                    
+                    <div class="col-md-4"></div>                    
+                    <div class="col-md-4">
+                       <div class="panel panel-default">
+                       <div class="panel-body">
+                            <div class="page-header">
+                                 <img src="image/Logo_PENS.png" style="width:150px; height:150px;"></img>
+                                 <h3>Login Area</h3>
+                            </div>
+                           
+                            <form id="loginForm" name="loginForm" th:action="@{/login/masuk/}" th:object="${userData}" method="post" accept-charset="utf-8" role="form">
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                                        <input type="text" class="form-control" id="username" name="username" placeholder="Enter username" th:field="*{email}" th:required="required" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <div class="input-group">
+                                       <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                                       <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan PIN" th:field="*{pin}" th:required="required" />
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Login</button>
+                                <br/>
+                                 <div id="note">
+                                    <div class="alert alert-warning">
+                                     <span th:if="${msg==null}">Masukkan KAP dan PIN Anda</span>
+                                     <span th:if="${msg!=null}" th:text="${msg}"></span>
+                                    </div>
+                                </div>
+                                <!-- <div style="text-align:right;"><a href="#signup">Sign Up</a></div> -->
+                            </form>
+                        </div>
+                        </div>                    
+                    </div>
+                    <div class="col-md-4"></div>                         
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div id="signup" style="background-color: black; width:100%; height:100%; padding-top:5%; text-align:center;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">                    
+                    <div class="col-md-4"></div>                    
+                    <div class="col-md-4">
+                       <div class="panel panel-default">
+                       <div class="panel-body">
+                            <div class="page-header">
+                                 <img src="image/harvard_logo.png" style="width:150px; height:150px;"></img>
+                                 <h3>Sign Up Area</h3>
+                            </div>
+                            <form id="formRegister" name="formRegister" th:action="@{/login/daftar}" method="post" th:object="${usersData}"  accept-charset="utf-8" role="form">
+                                <div class="form-group">                                    
+                                    <div class="input-group" style="width: 100%;">
+                                        <input type="email" class="form-control" name="email" placeholder="Enter E-mail" th:field="*{email}" th:required="required" />
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" style="width: 100%;">
+                                        <input type="text" class="form-control" name="username" placeholder="Enter Username" th:field="*{username}" th:required="required" />
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" style="width: 100%;">
+                                        <input type="password" class="form-control" name="passwd2" placeholder="Enter Password" th:field="*{password}" th:required="required" />
+                                    </div>                                    
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" style="width: 100%;">
+                                        <input type="password" class="form-control" name="repeatpasswd" placeholder="Repeat Password" th:field="*{password}" th:required="required" />
+                                    </div>                                    
+                                </div>
+                                <a class="page-scroll"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-lock"></span> Sign Up</button></a>
+
+                                <div id="note"></div>
+                            </form>
+                        </div>
+                        </div>                    
+                    </div>
+                    <div class="col-md-4"></div>                         
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- jQuery -->
+    
+   
+    
+   
+    
+
+   
+
+</body>
+
+</html>

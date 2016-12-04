@@ -1,0 +1,60 @@
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Index</title>
+
+			<link rel="stylesheet" type="text/css" media="all"  th:href="@{/assets/css/style-informasi.css}"  href="../assets/css/style-informasi.css" />
+		</head>
+		<body>
+			<div id="popUp">
+				<iframe id="popUpEdit" src="" name="iframe_edit" seamless=""></iframe>
+			</div>
+			<div id="header">
+				<div id="header-left">
+					<div id="header-logo"></div>
+					<div id="header-text">Verifikasi Informasi Data Mahasiswa</div>
+				</div>
+				<div id="header-right">
+	
+				</div>
+			</div>
+
+			<div id="container">
+				<div id="sidebar">
+					<ul id="nav">
+						<a id="nav-pertanyaan-jawaban" th:href="@{/login}"><li>Kembali ke halaman Log In</li></a>
+					</ul>
+				</div>
+				<div id="content">
+				
+					<div id="isi_informasi" >
+						<label>KODE PEMBAYARAN : <span th:text="${kodePembayaran}"/></label><br/><br/>
+
+						<label style="color: red;">Pembayaran harus dilakukan sebelum tanggal 20 Desember 2016, Pukul 15.00</label><br/><br/>
+						<label style="color: red;">Mohon informasi di bawah ini untuk selalu diingat karena akan digunakan untuk keperluan pendaftaran</label><br/><br/>
+						<label>Kode pembayaran ini berlaku bagi peserta dengan data sebagai berikut :</label><br/>
+						<label>KAP			: <span th:text="${kap}"/></label><br/>
+						<label>PIN			: <span th:text="${pin}"/></label><br/>
+						<label>Nama			: <span th:text="${nama}"/></label><br/>
+						<label>Tgl Lahir 	: <span th:text="${tgl}"/></label><br/>
+						<br/>
+						<br/>
+						<label style="color: blue;">Pembayaran dapat dilakukan melalui :</label><br/>
+						<table class="table_add" style="color: red;">
+							<label style="color: blue;">Bank Mandiri : rekening 089-908-0000</label><br/>
+							<label style="color: blue;">Bank Syariah : rekening 089-808-0000</label><br/>
+						</table>
+						<br/>
+						<br/>
+						<br/>
+						<label>Untuk informasi lebih silahkan kunjungi <a href="www.pens.ac.id">www.pens.ac.id</a>. Terimakasih.</label><br/>
+
+					</div>
+					<!--  -->
+					<!--  -->
+					
+				</div>
+			</div>
+
+		</body>
+	</html>

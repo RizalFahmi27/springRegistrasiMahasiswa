@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Pendaftaran Mahasiswa Baru</title>
+
+    <th:block th:include="fragments/header :: script"></th:block>
+    <!-- <link rel="stylesheet" type="text/css" media="all"  th:href="@{/css/style.css}"  href="../css/style.css" /> -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+       <th:block th:include="fragments/sidebar :: sidebar"></th:block>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 style="text-align:center;">Upload Berkas</h2><br/>
+                            <form class="form-horizontal" th:action="@{/fileUpload}" th:object="${dokumen}" method="post" enctype="multipart/form-data" id="formDokumen" name="formDokumen" >
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Nomor Pendaftaran</label>
+                                    <div class="col-sm-2">
+                                        <input type="text" name="no_pendaftaran" class="form-control" th:value="${dokumen.user.no_pendaftaran}" style="float:left;" th:disabled="true"/>
+                                    </div>
+                                    <label class="control-label"><p style="color:red;">&nbsp;*Mohon diingat untuk pembayaran pendaftaran</p></label>
+                                </div>  
+                                <div class="form-group">           
+                                    <label class="col-sm-4 control-label">Foto terbaru 3x4 (background merah)</label>
+                                    <div class="col-md-6">
+                                        <input type="hidden" name="id" id="id" th:value="${dokumen.id_dataDokumen}"  />
+                                        <div class="col-md-6">
+                                        <input type="file" name="file_foto" class="form-control" th:value="${dokumen.namaFileFoto}"  placeholder="foto" />
+                                    </div>
+                                    <div  class="col-md-3" id="statusFoto">
+                                        <span th:if="${dokumen.namaFileFoto==null}"><em>File belum diupload</em></span>
+                                        <span th:if="${dokumen.namaFileFoto!=null}"><a th:href="@{/download/files/10000212(id=${dokumen.id_dataDokumen},type='foto',no_daftar=${dokumen.user.kap})}" th:text="${dokumen.namaFileFoto}" th:target="_blank"></a></span>                                   
+                                    </div>
+                                    <div  class="col-md-3" id="buttonFoto">
+                                        <a th:if="${dokumen.namaFileFoto!=null}" class="btn btn-success" th:href="@{/delete/files/221110(id=${dokumen.id_dataDokumen},type='foto',no_daftar=${dokumen.user.kap})}"><span class="glyphicon glyphicon glyphicon-trash"></span></a>                                   
+                                    </div>
+                                    <div class="col-md-3" id="noteFoto"></div>                                
+                                </div>
+                                </div>
+
+                                <div class="form-group">                                    
+                                    <label class="col-sm-4 control-label">Scan Ijazah/SKHU/SKL/SK Peserta UN</label>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">
+                                        <input type="file" name="file_SKL" class="form-control" value="${dokumen.namaFileSKL}" placeholder="skl" />
+                                        </div>
+                                    
+                                    <div  class="col-md-3" id="statusSKL">
+                                        <span th:if="${dokumen.namaFileSKL==null}"><em>File belum diupload</em></span>
+                                        <span th:if="${dokumen.namaFileSKL!=null}"><a th:href="@{/download/files/10000212(id=${dokumen.id_dataDokumen},type='skl',no_daftar=${dokumen.user.kap})}" th:text="${dokumen.namaFileSKL}" th:target="_blank"></a></span>                                   
+                                    </div>
+                                    <div  class="col-md-3" id="buttonSKL">
+                                        <a th:if="${dokumen.namaFileSKL!=null}" class="btn btn-success" th:href="@{/delete/files/221110(id=${dokumen.id_dataDokumen},type='SKL',no_daftar=${dokumen.user.kap})}" ><span class="glyphicon glyphicon glyphicon-trash"></span></a>                                   
+                                    </div>
+                                    <div class="col-md-3" id="noteSKL"></div>
+                                </div>
+                                </div>
+
+                                <div class="form-group">                                    
+                                    <label class="col-sm-4 control-label">Scan Kartu Keluarga</label>
+                                    <div class="col-md-6">
+                                        <div class="col-md-6">
+                                        <input type="file" name="file_KK" class="form-control" value="${dokumen.namaFileSKL}" placeholder="kk" />
+                                    </div>
+                                    <div  class="col-md-3" id="statusKK">
+                                        <span th:if="${dokumen.namaFileKK==null}"><em>File belum diupload</em></span>
+                                        <span th:if="${dokumen.namaFileKK!=null}"><a th:href="@{/download/files/10000212(id=${dokumen.id_dataDokumen},type='kk',no_daftar=${dokumen.user.kap})}" th:text="${dokumen.namaFileKK}" th:target="_blank"></a></span>                                   
+                                    </div>
+                                    <div  class="col-md-3" id="buttonKK">
+                                        <a th:if="${dokumen.namaFileKK!=null}" class="btn btn-success" th:href="@{/delete/files/221110(id=${dokumen.id_dataDokumen},type='kk',no_daftar=${dokumen.user.kap})}"><span class="glyphicon glyphicon glyphicon-trash"></span></a>                                   
+                                    </div>
+                                    <div class="col-md-3" id="noteKK"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">     
+                                    <label>
+                                        <p class="help-block">
+                                            Membayar biaya pendaftaran Penerimaan Mahasiswa Baru (PMB PENS) di bank BRI, BNI, bank Permata, bank Mandiri, bank CIMB Niaga dan bank BTN dengan menggunakan 9 digit nomor pendaftaran yang telah diterima. 
+                                        <br/>
+                                            Biaya pendaftaran semua jalur D3 dan D4 : Rp.100.000,- (seratus ribu rupiah) untuk semua jalur.
+                                        </p>
+
+                                        <p style="color:red;">&nbsp;Pastikan formulir pendaftaran dan pilihan program studi telah sesuai karena tidak dapat diubah lagi setelah Anda membayar biaya pendaftaran.</p>
+                                        <p >Setelah Anda mengunggah bukti pembayaran, silahkan tunggu sampai sistem memverfifikasi akun Anda dan tombol cetak akan muncul.</p>
+                                    </label>                               
+                                    <label class="col-sm-4 control-label">Scan Slip Bukti Pembayaran</label>
+                                            <div class="col-md-6">
+                                            <div class="col-md-6">
+                                            <input type="file" name="file_bukti" class="form-control" value="${dokumen.namaFileBuktiPendaftaran}" placeholder="daftar" />
+                                        </div>
+                                        <div  class="col-md-3" id="statusDaftar">
+                                            <span th:if="${dokumen.namaFileBuktiPendaftaran==null}"><em>File belum diupload</em></span>
+                                            <span th:if="${dokumen.namaFileBuktiPendaftaran!=null}"><a th:href="@{/download/files/10000212(id=${dokumen.id_dataDokumen},type='bukti',no_daftar=${dokumen.user.kap})}" th:text="${dokumen.namaFileBuktiPendaftaran}" th:target="_blank"></a></span>                                   
+                                        </div>
+                                        <div  class="col-md-3" id="buttonDaftar">
+                                            <a th:if="${dokumen.namaFileBuktiPendaftaran!=null}" class="btn btn-success" th:href="@{/delete/files/221110(id=${dokumen.id_dataDokumen},type='bukti',no_daftar=${dokumen.user.kap})}"><span class="glyphicon glyphicon glyphicon-trash"></span></a>                                   
+                                        </div>
+                                        <div class="col-md-3" id="noteDaftar"></div>
+                                        </div>                                    
+                                </div>
+
+                                <br/>
+
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                    <label>
+                                      <input type="checkbox" th:required="required"/>
+                                        <p class="help-block">Saya menyatakan dengan sesungguhnya bahwa data yang saya isikan dalam formulir ini benar. Apabila ternyata data tersebut tidak benar/palsu, maka saya bersedia menerima sanksi yang berlaku</p>
+                                    </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">   
+
+                                    <div class="col-sm-9">
+                                        <a href="#menu-toggle"><button class="btn btn-success" id="menu-toggle"><span class="glyphicon glyphicon-arrow-left"></span> Hide Menu</button></a>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <a href="#"><button type="reset" class="btn btn-danger" data-toggle="tooltip" title="Batal">Reset <span class="glyphicon glyphicon-remove"></span></button></a>
+                                        <button type="submit" name="next" class="btn btn-primary" data-toggle="tooltip" title="Simpan Data mahasiswa"> 
+                                        Submit <span class="glyphicon glyphicon-arrow-right"/></button>                                     
+                                    </div>
+                                </div><br/>
+
+                                <center>
+
+                                <div class="form-group" th:switch="${dokumen.user.status}">
+                                    <a th:href="@{/cetak/2200001/kartu-ujian}" th:case="true" class="btn btn-danger" data-toggle="tooltip">Cetak Kartu Ujian</a>
+                                    <p style="color:red;" th:case="false">&nbsp;Akun Anda belum terverifikasi.</p>
+                                    <p style="color:red;" th:case="null">&nbsp;Akun Anda belum terverifikasi.</p>
+                                </div> 
+                                </center>
+
+                            </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+        <!-- /#logout -->
+        <div id="logout" class="modal bs-example-modal-sm" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header"><h4>Logout <span class="glyphicon glyphicon-lock"></span></h4></div>
+              <div class="modal-body"><span class="glyphicon glyphicon-question-sign"></span> Are you sure you want to log-off?</div>
+              <div class="modal-footer"><a href="index.html" class="btn btn-primary btn-block">Logout</a></div>
+            </div>
+          </div>
+        </div><!-- /#logout -->
+    </div>
+    <!-- /#wrapper -->
+
+    
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
+</body>
+
+</html>

@@ -17,7 +17,7 @@ public class ControllerHome {
 			return "redirect:/login";  	
 		}
 		System.out.println("masuk root");
-		String id = (String) session.getAttribute("email");
-		return "redirect:/dashboard/user/"+id;
+		
+		return "redirect:/user/upload_berkas/";
 	}
 }

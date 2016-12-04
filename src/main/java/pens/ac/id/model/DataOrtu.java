@@ -1,4 +1,6 @@
 package pens.ac.id.model;
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +13,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -36,4 +39,64 @@ public class DataOrtu {
 	
 	@OneToOne(mappedBy="dataOrtu")
 	private Users user;
+	
+	@Column(length=255)
+	private String nama_ayah;
+	
+	@Column(length=50)
+	private String jenis_kelamin_ayah;
+	
+	@Column(length=50)
+	private String tempat_lahir_ayah;
+	
+	@Column(length=255)
+	private String alamat_asal_ayah;
+	
+	@Column(length=50)
+	private String kota_ayah;
+	
+	@Column(length=50)
+	private String provinsi_ayah;
+	
+	@Column(length=50)
+	private String no_telepon_ayah;
+	
+	@Column(length=50)
+	private String email_ayah;
+	
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date tanggal_lahir_ayah;
+	
+	@Column(length=50)
+	private String kode_pos_ayah;
+	
+	@Column(length=255)
+	private String nama_ibu;
+	
+	@Column(length=50)
+	private String jenis_kelamin_ibu;
+	
+	@Column(length=50)
+	private String tempat_lahir_ibu;
+	
+	@Column(length=255)
+	private String alamat_asal_ibu;
+	
+	@Column(length=50)
+	private String kota_ibu;
+	
+	@Column(length=50)
+	private String provinsi_ibu;
+	
+	@Column(length=50)
+	private String no_telepon_ibu;
+	
+	@Column(length=50)
+	private String email_ibu;
+	
+	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	private Date tanggal_lahir_ibu;
+	
+	@Column(length=50)
+	private String kode_pos_ibu;
 }

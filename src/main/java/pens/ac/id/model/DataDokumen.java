@@ -42,10 +42,11 @@ public class DataDokumen {
 	@Column(length=255)
 	private String namaFileKK;
 	
+	@Column(length=255)
+	private String namaFileBuktiPendaftaran;
+	
 	@OneToOne(mappedBy= "dataDokumen")
 	private Users user;
 	
-	public String statusFoto;
-	public String statusKK;
-	public String statusSKL;
+	
 }
