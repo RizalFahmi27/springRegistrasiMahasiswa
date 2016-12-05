@@ -33,7 +33,7 @@ public class LokasiUjian {
 	
 	@Column(length=255)
 	private String alamat;
-	
-	@OneToOne(mappedBy="lokasiUjian")
-	private Users user;
+//	
+//	@OneToOne(mappedBy="lokasiUjian")
+//	private Users user;
 }

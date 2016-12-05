@@ -195,7 +195,7 @@ public class ControllerUser {
 	
 	
 	
-	public String generateNumber(int n) {
+	public static String generateNumber(int n) {
         String s = "";
         double d;
         for (int i = 1; i <= n; i++) {

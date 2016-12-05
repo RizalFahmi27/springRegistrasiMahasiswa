@@ -46,6 +46,7 @@ import pens.ac.id.model.DataDokumen;
 import pens.ac.id.model.KartuUjian;
 import pens.ac.id.service.ServiceUsers;
 import pens.ac.id.service.ServiceDokumen;
+import pens.ac.id.service.ServiceLokasiUjian;
 import pens.ac.id.model.Users;
 
 import java.io.File;
@@ -63,6 +64,9 @@ public class ControllerFormDokumen {
 	
 	@Autowired
 	ServiceDokumen serviceDokumen;
+	
+	@Autowired
+	ServiceLokasiUjian ServiceLokasiUjian;
 	
 	@RequestMapping(value="/user/upload_berkas/", method=RequestMethod.GET)
 	public String dokumen(Model model, HttpServletRequest request){
@@ -275,9 +279,14 @@ public class ControllerFormDokumen {
         // create some sample data
         	data.setAlamat(user.getDataDiri().getAlamat_asal());
         	data.setFoto(user.getDataDokumen().getNamaFileFoto());
-        	data.setLokasi_ujian(user.getLokasiUjian().getNama_lokasi()+"\n"+user.getLokasiUjian().getAlamat());
+        	System.out.println(user.getLokasiUjian());
+        	//data.setLokasi_ujian(user.getLokasiUjian().getNama_lokasi()+"\n"+user.getLokasiUjian().getAlamat());
+        	System.out.println("demo" + ServiceLokasiUjian.getById(user.getLokasiUjian()).getNama_lokasi()+"\n"+ServiceLokasiUjian.getById(user.getLokasiUjian()).getAlamat());
+        	data.setLokasi_ujian(ServiceLokasiUjian.getById(user.getLokasiUjian()).getNama_lokasi()+"\n"+ServiceLokasiUjian.getById(user.getLokasiUjian()).getAlamat());
         	data.setNama(user.getNamalengkap());
+        	if(user.getNamalengkap().length()>10)
         	data.setNama_lembar_ujian(user.getNamalengkap().substring(0, 10));
+        	else data.setNama_lembar_ujian(user.getNamalengkap());
         	data.setNo_peserta(user.getNoUjian());
         	data.setNo_telepon(user.getDataDiri().getNo_telepon());
         	data.setPilihan_jurusan_1(user.getDataDiri().getJurusan1());

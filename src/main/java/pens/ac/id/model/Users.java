@@ -67,6 +67,8 @@ public class Users {
 	@Column(length=200, unique=true)
 	private String noUjian;
 	
+	private long lokasiUjian;
+	
 //	@Column(length=20)
 //	private long id_dataDiri;
 //	
@@ -96,9 +98,9 @@ public class Users {
 	@JoinColumn(name="id_data_diri")
 	private DataDiri dataDiri;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="id_lokasi_ujian")
-	private LokasiUjian lokasiUjian;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name="id_lokasi_ujian")
+//	private LokasiUjian lokasiUjian;
 
 	
 	
