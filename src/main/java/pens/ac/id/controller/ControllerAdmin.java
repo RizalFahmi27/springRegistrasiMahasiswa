@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,6 +65,32 @@ public class ControllerAdmin {
 		user.setStatus(true);
 		serviceUsers.save(user);
 		return "done";
+	}
+	
+	@RequestMapping(value="/admin/delete/3324442/", method=RequestMethod.POST)
+	@ResponseBody
+	public String deleteData(@RequestParam("id") Long id){
+		System.out.println("masuk delete");
+		Users user = serviceUsers.getById(id);
+		if(user!=null){
+			serviceUsers.deleteData(id);
+			return "Hapus data berhasil";
+		}
+		
+		else {
+			return "Hapus data gagal";
+		}
+	}
+	
+	@RequestMapping(value="/admin/data-calon-mahasiswa/120021{id}", method=RequestMethod.GET)
+	public String dataCamaba(@PathVariable String id, Model model){
+		Users user = serviceUsers.getById(Long.parseLong(id));
+		if(user==null)
+			return "404";
+		else {
+			model.addAttribute("mhs",user);
+			return "/admin/data-pendaftar";
+		}
 	}
 	
 }

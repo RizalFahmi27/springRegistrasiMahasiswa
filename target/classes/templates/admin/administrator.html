@@ -24,6 +24,65 @@
       overflow-y: auto; 
     }
   </style>
+
+<script>
+        $(document).ready(function(){
+          
+          $('.delete_product').click(function(e){
+            
+            e.preventDefault();
+            
+            var pid = $(this).attr('data-id');
+            var parent = $(this).parent('td').parent('tr');
+           
+            
+            bootbox.dialog({
+              message: 'Apakah Anda yakin ingin menghapus data ini?',
+              title: 'Konfirmasi Penghapusan',
+              buttons: {
+              success: {
+                label: 'Batal',
+                className: 'btn-success',
+                callback: function() {
+                 $('.bootbox').modal('hide');
+                }
+              },
+              danger: {
+                label: 'Hapus!',
+                className: 'btn-danger',
+                callback: function() {                
+
+                  $.ajax({
+                    
+                    type: "POST",
+                    url: "admin/delete/3324442/",
+                    data : {
+                      "id" : pid
+                    }      
+                  })
+                  .done(function(response){
+                    
+                    bootbox.alert(response);
+                    parent.fadeOut('slow');
+                    
+                  })
+                  .fail(function(){       
+                    bootbox.alert('Proses Gagal ....');
+                                  
+                    })
+                              
+                  }
+                }
+              }
+            });
+            
+            
+          });
+          
+        });
+      </script>
+
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -161,16 +220,22 @@
                   <th>Nomor Pendaftaran</th>
                   <th>Nama Mahasiswa</th>
                   <th>Status</th>
+                  <th>Aksi</th>
                 </tr>
                 </thead>
                 <tbody>
                 <th:block th:object="${list}" th:each="data : ${list}">                   
                 <tr>
 
-                <td><a href="@{/admin/data_mhs(id=data.id)}"><span th:text="${data.no_pendaftaran}"></span></a></td>
+                <td><a th:href="@{/admin/data-calon-mahasiswa/120021{id}(id=${data.id})}"><span th:text="${data.no_pendaftaran}"></span></a></td>
                 <td><span th:text="${data.namalengkap}"/></td>
                 <td th:id="${data.id}" th:if="${not data.status}"> <button class="btn btn-primary" style="background-color:red;" th:onclick="'javascript:changeStatus(' + ${data.id} + ')'"> Verifikasi</button></td>
                 <td th:if="${data.status}"> <button class="btn btn-primary" th:disabled="true" > Sudah terverifikasi</button></td>
+                <td><a class='delete_product' th:attr="data-id=${data.id}"> <i class='glyphicon glyphicon-trash'></i></a>
+
+                <a href='#' style='margin-left:30px;'><i class='glyphicon glyphicon-edit'></i></a>
+
+                </td>
               </tr>
             </th:block>
                 </tbody>

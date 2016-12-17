@@ -214,7 +214,7 @@ public class ControllerFormDokumen {
 	public void downloadFileDaftarUlang(HttpServletRequest request, HttpServletResponse response, @RequestParam("id") long id, @RequestParam("type") String type, @RequestParam("no_daftar") String no_daftar) throws IOException{
 		
 		HttpSession session = request.getSession();
-		if(session.getAttribute("is_loggedIn")!=null){
+		
 		String PATH = "C:/Users/Rizal Fahmi/workspace2/mySpring/src/main/resources/static/files/mahasiswa_baru/"+ no_daftar + "/";
 		
 		DataDokumen dokumen = serviceDokumen.getById(id);
@@ -259,7 +259,7 @@ public class ControllerFormDokumen {
 		
 		FileCopyUtils.copy(is, response.getOutputStream());
 		
-		}
+		
 	}
 	
 	

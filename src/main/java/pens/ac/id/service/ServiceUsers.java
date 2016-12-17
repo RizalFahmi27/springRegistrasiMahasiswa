@@ -36,6 +36,10 @@ public class ServiceUsers  {
 		return daoUsers.findOne(id);
 	}
 	
+	public void deleteData(Long id){
+		daoUsers.delete(id);
+	}
+	
 	public boolean updateIdDokumen(Users user){
 		Users oldUser = daoUsers.findOne(user.getId());
 		if(oldUser!=null){
@@ -71,5 +75,7 @@ public class ServiceUsers  {
 	public Users getByNamalengkap(String namalengkap){
 		return daoUsers.getByNamalengkap(namalengkap);
 	}
+
+	
 	
 }

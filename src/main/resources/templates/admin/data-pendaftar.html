@@ -1,22 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Data Tables</title>
+  <meta charset="utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+  <title th:text="${mhs.kap}"></title>
   <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
   
-  <!-- DataTables -->
-  <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-  <!-- AdminLTE Skins. Choose a skin from the css/skins
-       folder instead of downloading all of them to reduce the load. -->
-  <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-
+   <th:block th:include="fragments/headerAdmin :: scriptAdmin"></th:block>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -96,13 +88,13 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
               <span class="hidden-xs">Alexander Pierce</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
 
                 <p>
                   Alexander Pierce - Web Developer
@@ -128,7 +120,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+          <img src="assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -159,34 +151,159 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                <tr>
-                  <th>Nomor Pendaftaran</th>
-                  <th>Nama Mahasiswa</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td><a href="a_data_mhs_lengkap.html">Trident</a></td>
-                  <td>Trident</td>
-                </tr>
-                <tr>
-                  <td><a href="a_data_mhs_lengkap.html">Trident</a></td>
-                  <td>Trident</td>
-                </tr>
-                <tr>
-                  <td><a href="a_data_mhs_lengkap.html">Trident</a></td>
-                  <td>Trident</td>
-                </tr>                               
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Nomor Pendaftaran</th>
-                  <th>Nama Mahasiswa</th>                  
-                </tr>
-                </tfoot>
-              </table>
+              
+              <div action="" method="post">  
+                                    
+                <center>
+                    <img th:src="@{/static/files/mahasiswa_baru/${mhs.kap}/${mhs.dataDokumen.namaFileFoto}}" style="border:3px solid #000;" width="150" height="150"/>
+                </center><br/>
+                <table class="table">
+                  <tr>
+                    <td><h2>Nama Mahasiswa</h2></td>
+                    <td><h2><span th:text="${mhs.namalengkap}"/></h2></td>
+                  </tr>
+                </table>
+                <div class="col-lg-12">
+                    
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#data_mhs" data-toggle="tab">Data Mahasiswa</a></li>
+                        <li><a href="#data_ortu" data-toggle="tab">Data Orang Tua / Wali</a></li>
+                        <li><a href="#data_asal_sekolah" data-toggle="tab">Data Asal Sekolah</a></li>
+                        <li><a href="#berkas" data-toggle="tab">Data Berkas</a></li>
+                    </ul>
+                     <!-- Tab panes content dari tab di atas -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="data_mhs">
+                          <table class="table">
+                            <tr>
+                              <td>Nomor Pendaftaran</td>
+                              <td><span th:text="${mhs.no_pendaftaran}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Jenis Kelamin</td>
+                              <td><span th:text="${mhs.dataDiri.jenis_kelamin}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Agama</td>
+                              <td><span th:text="${mhs.dataDiri.agama}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Tempat Lahir</td>
+                              <td><span th:text="${mhs.dataDiri.tempat_lahir}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Tanggal Lahir</td>
+                              <td><span th:text="${mhs.dataDiri.tanggal_lahir}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Alamat</td>
+                              <td><span th:text="${mhs.dataDiri.alamat_asal}"/></td>
+                            </tr>
+                            <tr>
+                              <td>No Telepon</td>
+                              <td><span th:text="${mhs.dataDiri.no_telepon}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Email</td>
+                              <td><span th:text="${mhs.dataDiri.email}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Pilihan Jurusan 1</td>
+                              <td><span th:text="${mhs.dataDiri.jurusan1}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Pilihan Jurusan 2</td>
+                              <td><span th:text="${mhs.dataDiri.jurusan2}"/></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="tab-pane" id="data_ortu">
+                          <table class="table">
+                            <tr>
+                              <td>Nama Ayah / Wali</td>
+                              <td><span th:text="${mhs.dataOrtu.nama_ayah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Jenis Kelamin</td>
+                              <td><span th:text="${mhs.dataOrtu.jenis_kelamin_ayah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Alamat</td>
+                              <td><span th:text="${mhs.dataOrtu.alamat_asal_ayah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>No Telepon</td>
+                              <td><span th:text="${mhs.dataOrtu.no_telepon_ayah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Email</td>
+                              <td><span th:text="${mhs.dataOrtu.email_ayah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Pekerjaan</td>
+                              <td><span th:text="${mhs.dataOrtu.pekerjaan_ayah}"/></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="tab-pane" id="data_asal_sekolah">
+                          <table class="table">
+                            <tr>
+                              <td>Nama Sekolah</td>
+                              <td><span th:text="${mhs.dataSekolah.nama_sekolah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Jenis Sekolah</td>
+                              <td><span th:text="${mhs.dataSekolah.jenis_sekolah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Alamat Sekolah</td>
+                              <td><span th:text="${mhs.dataSekolah.alamat_sekolah}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Jurusan</td>
+                              <td><span th:text="${mhs.dataSekolah.jurusan}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Rata-rata nilai UNAS</td>
+                              <td><span th:text="${mhs.dataSekolah.nilai_UN}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Rata-rata nilai rapor (kelas X-XII)</td>
+                              <td><span th:text="${mhs.dataSekolah.nilai_rapor}"/></td>
+                            </tr>
+                            <tr>
+                              <td>Tahun Lulus</td>
+                              <td><span th:text="${mhs.dataSekolah.tahun_lulus}"/></td>
+                            </tr>
+                          </table>
+                        </div>
+                        <div class="tab-pane" id="berkas">
+                          <table class="table">
+                            <tr>
+                              <td>Scan Ijazah/SKHU/SKL/SK Peserta UN</td>
+                              <td><a class="btn btn-default" th:href="@{/download/files/10000212(id=${mhs.dataDokumen.id_dataDokumen},type='skl',no_daftar=${mhs.kap})}" th:target="_blank">Unduh</a></td>
+                            </tr>
+                            <tr>
+                              <td>Scan KK</td>
+                              <td><a class="btn btn-default" th:href="@{/download/files/10000212(id=${mhs.dataDokumen.id_dataDokumen},type='kk',no_daftar=${mhs.kap})}" th:target="_blank">Unduh</a></td>
+                            </tr>
+                            <tr>
+                              <td>Foto 3X4</td>
+                              <td><a class="btn btn-default" th:href="@{/download/files/10000212(id=${mhs.dataDokumen.id_dataDokumen},type='foto',no_daftar=${mhs.kap})}" th:target="_blank">Unduh</a></td>
+                            </tr>
+                            <tr>
+                              <td>Scan Slip Pembayaran</td>
+                              <td><a class="btn btn-default" th:href="@{/download/files/10000212(id=${mhs.dataDokumen.id_dataDokumen},type='bukti',no_daftar=${mhs.kap})}" th:target="_blank">Unduh</a></td>
+                            </tr>
+                          </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                  <button type="button" class="btn btn-primary" style="float:right">Verifikasi</button>
+                </div>
+              </div>
             </div>
             <!-- /.box-body -->
           </div>
@@ -209,21 +326,7 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 2.2.3 -->
-<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="js/bootstrap.min.js"></script>
-<!-- DataTables -->
-<script src="plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="plugins/datatables/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="plugins/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="dist/js/app.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+
 <!-- page script -->
 <script>
   $(function () {

@@ -44,6 +44,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 	  if (!registry.hasMappingForPattern("/assets/**")) {
 	     registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
+	     registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
 	  }
 	}
 	

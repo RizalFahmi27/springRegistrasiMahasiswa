@@ -71,6 +71,9 @@ public class DataOrtu {
 	private String kode_pos_ayah;
 	
 	@Column(length=255)
+	private String pekerjaan_ayah;
+	
+	@Column(length=255)
 	private String nama_ibu;
 	
 	@Column(length=50)
@@ -94,9 +97,12 @@ public class DataOrtu {
 	@Column(length=50)
 	private String email_ibu;
 	
-	 @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+	@DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
 	private Date tanggal_lahir_ibu;
 	
 	@Column(length=50)
 	private String kode_pos_ibu;
+	
+	@Column(length=255)
+	private String pekerjaan_ibu;
 }
